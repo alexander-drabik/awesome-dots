@@ -96,7 +96,13 @@ local globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"}),
 	-- Terminal prompt
 	awful.key({ modkey }, "e", function() terminal_prompt.launch() end,
-			{description = "show terminal promt", group = "launcher"})
+			{description = "show terminal promt (dirs)", group = "launcher"}),
+	awful.key({ modkey }, "d", function() terminal_prompt.launch(true) end,
+			{description = "show terminal promt (files)", group = "launcher"}),
+			
+	--Media
+	awful.key({ }, "#172", function()  awful.spawn("playerctl play-pause") end,
+			{description = "pause/play", group = "media"})
 )
 
 local clientkeys = gears.table.join(

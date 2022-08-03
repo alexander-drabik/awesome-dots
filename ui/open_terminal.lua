@@ -64,10 +64,9 @@ awful.placement.top(
 	}
 )
 
-local function show_results(results) 
+local function show_results(results, file) 
 	input_box.visible = true
 	result_box.visible = true
-	
 
 	local max_length = 0
 	local string = ""
@@ -84,7 +83,7 @@ local function show_results(results)
 	awful.placement.top(
 		result_box,
 		{
-			margins = {top = 88},
+			margins = { top = 88 },
 			parent = awful.screen.focused()
 		}
 	)
@@ -99,7 +98,11 @@ local function show_results(results)
 			if not text or #text == 0 then return end
 			local a = tonumber(text)
 			if a > 0 and a <= #results then
-				awful.spawn("wezterm start --cwd "..results[a])
+				if file then
+					awful.spawn("wezterm start -- nvim "..results[a])
+				else 
+					awful.spawn("wezterm start --cwd "..results[a])
+				end
 			end
 			input_box.visible = false
 			result_box.visible = false
@@ -112,11 +115,21 @@ local function show_results(results)
     }
 end
 
-local function launch()
+local function launch(file)
 	input_box.visible = true
 
+	local type_title = ""
+	local type_option = ""
+	if file then 
+		type_title = "File"
+		type_option = "f"
+	else
+		type_title = "Dir"
+		type_option = "d"
+	end
+
 	awful.prompt.run {
-        prompt = "<b>Dir Path</b>: ",
+        prompt = "<b>"..type_title.." Path</b>: ",
         textbox = prompt.widget,
         history_path = gfs.get_dir('cache') .. '/translate_history',
         bg_cursor = input_box.border_color,
@@ -124,7 +137,7 @@ local function launch()
         exe_callback = function(text)
             if not text or #text == 0 then return end
 			local command = ([[
-				find . -type d \
+				find . -type ]]..type_option..[[ \
 				-and -ipath '%s' \
 				-maxdepth 4 \
 				| head -5
@@ -139,7 +152,7 @@ local function launch()
 						for l in stdout:gmatch "[^\n]+" do
 							table.insert(results, l)
 						end
-						show_results(results)
+						show_results(results, file)
 					end
 				end
 			)
