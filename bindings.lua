@@ -96,13 +96,23 @@ local globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"}),
 	-- Terminal prompt
 	awful.key({ modkey }, "e", function() terminal_prompt.launch() end,
-			{description = "show terminal promt (dirs)", group = "launcher"}),
+			  {description = "show terminal promt (dirs)", group = "launcher"}),
 	awful.key({ modkey }, "d", function() terminal_prompt.launch(true) end,
-			{description = "show terminal promt (files)", group = "launcher"}),
+			  {description = "show terminal promt (files)", group = "launcher"}),
 			
 	--Media
 	awful.key({ }, "#172", function()  awful.spawn("playerctl play-pause") end,
-			{description = "pause/play", group = "media"})
+			  {description = "pause/play", group = "media"}),
+	awful.key({ }, "XF86AudioLowerVolume", function()
+		awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")
+		require "ui.volume".update_volume()
+	end,
+		      {description = "lower volume", group = "media"}),
+	awful.key({ }, "XF86AudioRaiseVolume", function()
+		awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")
+		require "ui.volume".update_volume()
+	end,
+		      {description = "raise volume", group = "media"})
 )
 
 local clientkeys = gears.table.join(

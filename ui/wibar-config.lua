@@ -40,6 +40,8 @@ awful.screen.connect_for_each_screen(function(s)
 
 	s.mywibox = awful.wibar({ position = "top", screen = s })
 
+	local text_box = require "ui.volume".text_box
+
 	-- Add widgets to the wibox
 	s.mywibox:setup {
 		layout = wibox.layout.align.horizontal,
@@ -53,6 +55,7 @@ awful.screen.connect_for_each_screen(function(s)
 			layout = wibox.layout.fixed.horizontal,
 			mykeyboardlayout,
 			wibox.widget.systray(),
+			text_box,
 			mytextclock,
 		},
 	}
