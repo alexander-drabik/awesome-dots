@@ -38,7 +38,7 @@ awful.screen.connect_for_each_screen(function(s)
 		buttons = taglist_buttons
 	}
 
-	s.mywibox = awful.wibar({ position = "top", screen = s })
+	s.mywibox = awful.wibar({ position = "top", screen = s, height = 30})
 
 	local text_box = require "ui.volume".text_box
 

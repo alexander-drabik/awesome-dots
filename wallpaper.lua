@@ -6,7 +6,12 @@ local function set_wallpaper(s)
         if type(wallpaper) == "function" then
             wallpaper = wallpaper(s)
         end
-        gears.wallpaper.maximized(wallpaper, s, true)
+		
+		if s.index == 1 then
+			gears.wallpaper.maximized(wallpaper, s, true)
+		else 
+			gears.wallpaper.maximized("/home/alex/.config/awesome/themes/default/backgroundh.jpg", s, true)
+		end
     end
 end
 

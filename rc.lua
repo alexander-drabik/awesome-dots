@@ -27,7 +27,9 @@ modkey = "Mod4"
 
 -- Set layouts
 awful.layout.layouts = {
-    awful.layout.suit.tile,
+	awful.layout.suit.tile,
+	awful.layout.suit.tile.bottom,
+	awful.layout.suit.corner.nw,
 }
 
 -- Create a launcher widget and a main menu
@@ -55,3 +57,4 @@ awful.rules.rules = require "apps.app-properties"
 -- Manage signals
 require "signals"
 
+require "move_thunar"

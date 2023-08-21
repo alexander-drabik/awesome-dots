@@ -9,6 +9,9 @@ local rules = {
             raise = true,
 			keys = clientkeys,
 			buttons = clientbuttons,
+			maximized = false,
+			maximized_horizontal = false,
+			maximized_vertical = false,
 			screen = awful.screen.preferred,
 			placement = awful.placement.no_overlap+awful.placement.no_offscreen
 		}

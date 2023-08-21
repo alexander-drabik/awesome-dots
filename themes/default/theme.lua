@@ -7,7 +7,7 @@ local themes_path = "/home/alex/.config/awesome/themes/default/"
 
 local theme = {}
 
-theme.font          = "hack 12"
+theme.font          = "hack 10"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
